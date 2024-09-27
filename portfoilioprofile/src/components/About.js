@@ -6,129 +6,121 @@ import Homelogo from '../Homelogo.png';
 import { Divider } from '@mui/material';
 
 const About = () => {
-  const [aboutRef, aboutInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
-  const [techRef, techInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
-  const [photoRef, photoInView] = useInView({
+  const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
 
-  const aboutControls = useAnimation();
-  const techControls = useAnimation();
-  const photoControls = useAnimation();
+  const controls = useAnimation();
 
   React.useEffect(() => {
-    if (aboutInView) {
-      aboutControls.start('visible');
+    if (inView) {
+      controls.start('visible');
     } else {
-      aboutControls.start('hidden');
+      controls.start('hidden');
     }
-  }, [aboutControls, aboutInView]);
-
-  React.useEffect(() => {
-    if (techInView) {
-      techControls.start('visible');
-    } else {
-      techControls.start('hidden');
-    }
-  }, [techControls, techInView]);
-
-  React.useEffect(() => {
-    if (photoInView) {
-      photoControls.start('visible');
-    } else {
-      photoControls.start('hidden');
-    }
-  }, [photoControls, photoInView]);
+  }, [controls, inView]);
 
   return (
-    <motion.div className="flex flex-row h-fit ml-10 mr-10 pl-[8rem] pr-[8rem]">
-      <motion.div
-        ref={aboutRef}
-        className="w-[50%] h-full"
-        initial="hidden"
-        animate={aboutControls}
-        variants={{
-          visible: { x: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
-          hidden: { x: -10, opacity: 0 },
-        }}
-      >
-        <div className="text-slate-300">
-        <div className='text-start flex items-center content-center font-bold font-serif text-slate-300 text-[1.5rem] mb-5 mt-3'>
-        <p className='w-[13rem]'>About Me</p><p className='w-full'> <Divider className="mt-4 bg-white" /></p>
+    <motion.div
+      ref={ref}
+      className="flex flex-col mx-4 sm:mx-8 md:mx-10 px-4 sm:px-8 md:px-16 lg:px-32"
+      initial="hidden"
+      animate={controls}
+      variants={{
+        visible: { opacity: 1, transition: { duration: 0.8 } },
+        hidden: { opacity: 0 },
+      }}
+    >
+      <div className="text-slate-300">
+        <div className='text-start flex items-center content-center font-bold font-serif text-slate-300 text-xl sm:text-2xl mb-5 mt-3'>
+          <p className='w-32 sm:w-40'>About Me</p>
+          <p className='w-full'><Divider className="mt-4 bg-white" /></p>
         </div>
-          <p className="text-start">
-            Hey there! I'm Pankaj Kumar Gupta, a student at KIET Group of Institutions in Ghaziabad, India. I'm really passionate about web development and have been diving deep into JavaScript, Node.js, React, D3.js, and MongoDB. Along the way, I've been learning and mastering these technologies, coming up with cool solutions and pushing my limits. Recently, I've also started exploring new technologies that are in demand in the market, so I can stay ahead of the curve and boost my career prospects.
-          </p>
-        </div>
+
+        {/* Profile Photo for smaller screens */}
         <motion.div
-          ref={techRef}
-          className="text-slate-100 text-start font-bold mt-1"
-          initial="hidden"
-          animate={techControls}
+          className="ProfilePhoto w-full md:hidden flex justify-center items-center mb-8"
           variants={{
-            visible: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
-            hidden: { opacity: 0 },
-          }}
-        >
-          Technologies I've been using recently
-        </motion.div>
-        <motion.div
-          className="techstacks"
-          initial="hidden"
-          animate={techControls}
-          variants={{
-            visible: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
-            hidden: { opacity: 0 },
-          }}
-        >
-          <Techstack tech={{techhead:'Frontend',techuse:':-React    :-Tailwind    :-D3.Js'}}/>
-          <Techstack tech={{techhead:'Backend',techuse:'  :-NodeJs'}} />
-          <Techstack tech={{techhead:'Languages',techuse:'  :-C/C++    :-JavaScript    :-Python'}} />
-        </motion.div>
-      </motion.div>
-      <motion.div
-        ref={photoRef}
-        className="ProfilePhoto w-[50%] h-[100%] flex justify-center items-center"
-        initial="hidden"
-        animate={photoControls}
-        variants={{
-          visible: { x: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
-          hidden: { x: 10, opacity: 0 },
-        }}
-      >
-        <motion.div
-          className="w-[17rem] h-[17rem] flex justify-center items-center"
-          style={{
-            perspective: '1000px',
+            visible: { y: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
+            hidden: { y: 10, opacity: 0 },
           }}
         >
           <motion.div
-            className="w-[15rem] h-[15rem] mt-[10rem] rounded-lg border border-gray-400 shadow-xl"
-            style={{
-              transformStyle: 'preserve-3d',
-              boxShadow: '10px 10px 30px rgba(0, 0, 0, 0.2)',
-            }}
-            whileHover={{
-              rotateX: 0,
-              rotateY: 0,
-              boxShadow: '20px 20px 40px rgba(0, 0, 0, 0.4)',
-            }}
+            className="w-48 h-48 sm:w-64 sm:h-64 flex justify-center items-center"
+            style={{ perspective: '1000px' }}
           >
-            <motion.img
-              className="w-full h-full rounded-lg"
-              src={Homelogo}
-              alt="Logo"
-            />
+            <motion.div
+              className="w-40 h-40 sm:w-56 sm:h-56 rounded-lg border border-gray-400 shadow-xl"
+              style={{
+                transformStyle: 'preserve-3d',
+                boxShadow: '10px 10px 30px rgba(0, 0, 0, 0.2)',
+              }}
+              whileHover={{
+                rotateX: 0,
+                rotateY: 0,
+                boxShadow: '20px 20px 40px rgba(0, 0, 0, 0.4)',
+              }}
+            >
+              <motion.img
+                className="w-full h-full rounded-lg"
+                src={Homelogo}
+                alt="Logo"
+              />
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
+
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-1/2">
+            <p className="text-start text-sm sm:text-base">
+              Hey there! I'm Pankaj Kumar Gupta, a student at KIET Group of Institutions in Ghaziabad, India. I'm really passionate about web development and have been diving deep into JavaScript, Node.js, React, D3.js, and MongoDB. Along the way, I've been learning and mastering these technologies, coming up with cool solutions and pushing my limits. Recently, I've also started exploring new technologies that are in demand in the market, so I can stay ahead of the curve and boost my career prospects.
+            </p>
+
+            <div className="text-slate-100 text-start font-bold mt-4 text-sm sm:text-base">
+              Technologies I've been using recently
+            </div>
+            <div className="techstacks">
+              <Techstack tech={{techhead:'Frontend',techuse:':-React    :-Tailwind    :-D3.Js'}}/>
+              <Techstack tech={{techhead:'Backend',techuse:'  :-NodeJs'}} />
+              <Techstack tech={{techhead:'Languages',techuse:'  :-C/C++    :-JavaScript    :-Python'}} />
+            </div>
+          </div>
+
+          {/* Profile Photo for larger screens */}
+          <motion.div
+            className="ProfilePhoto hidden md:flex w-1/2 justify-center items-center"
+            variants={{
+              visible: { y: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
+              hidden: { y: 10, opacity: 0 },
+            }}
+          >
+            <motion.div
+              className="w-64 h-64 lg:w-72 lg:h-72 flex justify-center items-center"
+              style={{ perspective: '1000px' }}
+            >
+              <motion.div
+                className="w-56 h-56 lg:w-60 lg:h-60 rounded-lg border border-gray-400 shadow-xl"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  boxShadow: '10px 10px 30px rgba(0, 0, 0, 0.2)',
+                }}
+                whileHover={{
+                  rotateX: 0,
+                  rotateY: 0,
+                  boxShadow: '20px 20px 40px rgba(0, 0, 0, 0.4)',
+                }}
+              >
+                <motion.img
+                  className="w-full h-full rounded-lg"
+                  src={Homelogo}
+                  alt="Logo"
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 };

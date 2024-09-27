@@ -45,7 +45,7 @@ const Contact = () => {
   return (
     <motion.div
       ref={ref}
-      className='w-full flex justify-center pl-[8rem] pr-[8rem]'
+      className='w-full flex justify-center px-4 lg:px-[8rem]'
       initial='hidden'
       animate={controls}
       variants={{
@@ -59,7 +59,7 @@ const Contact = () => {
         </div>
       )}
       <motion.div
-        className="w-fit h-auto mx-12 mt-6 rounded overflow-hidden shadow-lg"
+        className="w-full lg:w-fit h-auto mx-6 lg:mx-12 mt-6 rounded overflow-hidden shadow-lg"
         initial='hidden'
         animate={controls}
         variants={{
@@ -67,20 +67,20 @@ const Contact = () => {
           hidden: { opacity: 0 },
         }}
       >
-        <div className='text-start flex items-center content-center font-bold font-serif text-slate-300 text-[1.5rem] mb-5 mt-3'>
+        <div className='text-start flex flex-col lg:flex-row items-center font-bold font-serif text-slate-300 text-[1.5rem] mb-5 mt-3'>
           <p className='w-[13rem]'> Contact Me</p>
           <p className='w-full'> <Divider className="mt-4 bg-white" /></p>
         </div>
-        <div className="text-center font-serif font-extrabold text-4xl text-slate-300">Let's Connect!</div>
-        <div className="border border-solid bordercolor rounded-md p-6">
+        <div className="text-center font-serif font-extrabold text-3xl lg:text-4xl text-slate-300">Let's Connect!</div>
+        <div className="border border-solid bordercolor rounded-md p-4 lg:p-6">
           <form ref={form} onSubmit={sendEmail}>
-            <div className="inputs flex">
-              <div className="w-1/2 pr-4">
-                <div className="punchline mb-2 font-serif font-bold text-2xl text-slate-300 min-h-16">
+            <div className="inputs flex flex-col lg:flex-row">
+              <div className="lg:w-1/2 pr-0 lg:pr-4">
+                <div className="punchline mb-2 font-serif font-bold text-xl lg:text-2xl text-slate-300 min-h-16">
                   Let's collaborate<br />
-                  <p className="text-4xl">And create wonders!</p>
+                  <p className="text-3xl lg:text-4xl">And create wonders!</p>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center lg:items-start">
                   <motion.input
                     className="mb-2 w-full px-1 py-1 border bordercolor bg-slate-500 h-12 m-2"
                     type="text"
@@ -129,9 +129,9 @@ const Contact = () => {
                   />
                 </div>
               </div>
-              <div className="w-1/2 mx-2 flex items-center justify-center">
+              <div className="lg:w-1/2 mx-0 lg:mx-2 flex items-center justify-center mt-6 lg:mt-0">
                 <motion.img
-                  className='border border-solid bordercolor rounded-md w-[15rem] h-[15rem] mt-14'
+                  className='border border-solid bordercolor rounded-md w-[0] h-[0] lg:w-[15rem] lg:h-[15rem]'
                   src={contactimg}
                   alt='Contact'
                   initial='hidden'

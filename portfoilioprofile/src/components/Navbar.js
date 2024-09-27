@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
-import Homelogo from '../Homelogo.png';
+// import Homelogo from '../Homelogo.png';
+import Navlogo from '../Navlogo.png';
 import useScrollPosition from './ScrollPosition';  // Make sure the path is correct
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const scrollPosition = useScrollPosition();
   const [isVisible, setIsVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     if (scrollPosition === 0) {
@@ -16,48 +19,95 @@ const Navbar = () => {
     }
   }, [scrollPosition]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const navItems = [
+    { name: 'HOME', to: 'home' },
+    { name: 'PROJECTS', to: 'projects' },
+    { name: 'EXPERIENCE', to: 'experience' },
+    { name: 'CONTACT', to: 'contact' },
+  ];
+
   return (
-    <motion.div
-      className='w-full h-30 flex border border-gray-800 shadow-lg '
+    <motion.nav
+      className='fixed w-full bg-black z-50 border border-gray-800 shadow-lg'
       initial={{ y: -100, opacity: 0 }}
       animate={isVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
       transition={{ duration: 0.8, type: 'spring', stiffness: 120 }}
     >
-      <div className='flex w-[50%] items-center justify-start ml-10 cursor-pointer '>
-        <motion.div
-          className='w-20 h-20 m-2 border border-solid rounded-full bg-center hover:border-dotted hover:border-gray-600'
-          style={{ backgroundImage: `url(${Homelogo})` }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        ></motion.div>
-        <motion.p
-          className='font-bold text-xl text-white hover:text-gray-500'
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          PANKAJ KUMAR'S
-        </motion.p>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex items-center justify-between h-20'>
+          <div className='flex items-center'>
+            <motion.div
+              className='w-16 h-16 sm:w-20 sm:h-20 m-2 rounded-full bg-center bg-cover hover:border-dotted hover:border-gray-600'
+              style={{ backgroundImage: `url(${Navlogo})` }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            ></motion.div>
+            
+          </div>
+          <div className='hidden md:block'>
+            <ul className='flex m-3 font-semibold text-white'>
+              {navItems.map((item) => (
+                <motion.li key={item.name} className='m-2 hover:text-gray-500' whileHover={{ scale: 1.1 }}>
+                  <Link to={item.to} smooth={true} duration={500}>{item.name}</Link>
+                </motion.li>
+              ))}
+              <motion.li 
+                className='px-4 py-2 rounded-md text-teal-400 text-[13px] border border-teal-300 hover:bg-teal-400 hover:text-bodyColor cursor-pointer duration-300' 
+                whileHover={{ scale: 1.1 }}
+              >
+                <a href="/Pankaj.Resume.pdf" download="Pankaj.Resume.pdf">RESUME</a>
+              </motion.li>
+            </ul>
+          </div>
+          <div className='md:hidden'>
+            <button
+              onClick={toggleMenu}
+              className='inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none'
+            >
+              {isMenuOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
       </div>
-      <div className='flex w-[50%] items-center justify-end cursor-pointer'>
-        <ul className='flex m-3 font-semibold text-white'>
-          <motion.li className='m-2 hover:text-gray-500' whileHover={{ scale: 1.1 }}>
-            <Link to="home" smooth={true} duration={500}>HOME</Link>
-          </motion.li>
-          <motion.li className='m-2 hover:text-gray-500' whileHover={{ scale: 1.1 }}>
-            <Link to="projects" smooth={true} duration={500}>PROJECTS</Link>
-          </motion.li>
-          <motion.li className='m-2 hover:text-gray-500' whileHover={{ scale: 1.1 }}>
-            <Link to="experience" smooth={true} duration={500}>EXPERIENCE</Link>
-          </motion.li>
-          <motion.li className='m-2 hover:text-gray-500' whileHover={{ scale: 1.1 }}>
-            <Link to="contact" smooth={true} duration={500}>CONTACT</Link>
-          </motion.li>
-          <motion.li className='px-4 py-2 rounded-md text-teal-400 text-[13px] border border-teal-300 hover:bg-teal-400 hover:text-bodyColor cursor-pointer duration-300' whileHover={{ scale: 1.1 }}>
-            <a href="/Pankaj.Resume.pdf" download="Pankaj.Resume.pdf">RESUME</a>
-          </motion.li>
-        </ul>
-      </div>
-    </motion.div>
+
+      {isMenuOpen && (
+        <div className='md:hidden border-t border-gray-800'>
+          <ul className='px-2 pt-2 pb-3 space-y-1 sm:px-3 font-semibold text-white'>
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link
+                  to={item.to}
+                  smooth={true}
+                  duration={500}
+                  className='block px-3 py-2 rounded-md text-base hover:text-gray-500'
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+            <li className='px-3 py-2'>
+              <a
+                href="/Pankaj.Resume.pdf"
+                download="Pankaj.Resume.pdf"
+                className='inline-block px-4 py-2 rounded-md text-teal-400 text-[13px] border border-teal-300 hover:bg-teal-400 hover:text-bodyColor cursor-pointer duration-300'
+                onClick={() => setIsMenuOpen(false)}
+              >
+                RESUME
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </motion.nav>
   );
 };
 
