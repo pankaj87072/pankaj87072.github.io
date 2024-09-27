@@ -4,7 +4,7 @@ import { Link } from '@mui/material';
 
 const SidebarIcons = ({ side, icons }) => (
   <motion.div
-    className={`fixed top-[12rem] h-full flex flex-col justify-center items-center ${side === 'left' ? 'left-[5rem]' : 'right-[5rem]'}`}
+    className={`fixed ${side ==='left'?'top-[15rem]':'top-[12rem]'}  h-full flex flex-col justify-center items-center ${side === 'left' ? 'left-[5rem]' : 'right-[5rem]'}`}
     style={{
       transform: side === 'left' ? 'translateX(-50%)' : 'translateX(50%)',
       opacity: 0
@@ -19,7 +19,7 @@ const SidebarIcons = ({ side, icons }) => (
         </motion.div>
       </Link>
     ))}
-    <div className="h-[30%] border border-gray-300"></div>
+    <div className={`${side ==='left'?'h-[40%]':'h-[30%]'} border border-gray-300`}></div>
   </motion.div>
 );
 
