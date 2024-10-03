@@ -31,4 +31,18 @@ body {
       border-radius: 20px;
       background-color: #fff;
   }
+  .backgroundStyle {
+    background-size: contain;
+    opacity: 0.6;
+    background-position: top right;
+    background-repeat: no-repeat;
+  }
+  
+  @media (max-width: 480px) {
+    .backgroundStyle {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
   

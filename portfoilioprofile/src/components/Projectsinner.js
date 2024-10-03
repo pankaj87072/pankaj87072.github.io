@@ -21,7 +21,7 @@ const Projectsinnercomp = ({ shift }) => {
         }}
         transition={{ type: 'spring', stiffness: 50, delay: 0.2 }}
       >
-        <img className='rounded-md w-full lg:w-[70%] h-auto' src={shift.pro} alt='projectimage'/>
+        <img className='rounded-md w-full lg:w-[60%] h-auto' src={shift.pro} alt='projectimage'/>
       </motion.div>
       <motion.div
         className={`projectdetails w-full lg:w-1/2 text-slate-300 text-base sm:text-lg mt-4 lg:mt-0`}
