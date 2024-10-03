@@ -59,7 +59,7 @@ const Navbar = () => {
                 className='px-4 py-2 rounded-md text-teal-400 text-[13px] border border-teal-300 hover:bg-teal-400 hover:text-bodyColor cursor-pointer duration-300' 
                 whileHover={{ scale: 1.1 }}
               >
-                <a href="/Pankaj.Resume.pdf" download="Pankaj.Resume.pdf">RESUME</a>
+                <a href="/PANKAJ_RESUME_.pdf" download="Pankaj.Resume.pdf">RESUME</a>
               </motion.li>
             </ul>
           </div>
