@@ -9,6 +9,7 @@ import traceroute from '../traceroute.png';
 import iot from '../iot.png';
 import TechStackused from './TechStackused'; // Import the TechStack component
 
+
 const Projects = () => {
   const isNormalDirection = true;
   const normalJustify = 'justify-end';

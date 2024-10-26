@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 // import Homelogo from '../Homelogo.png';
 import Navlogo from '../Navlogo.png';
-import useScrollPosition from './ScrollPosition';  // Make sure the path is correct
+import useScrollPosition from './ScrollPosition';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
@@ -70,7 +70,7 @@ const Navbar = () => {
             >
               {isMenuOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
+              ): (
                 <Menu className="block h-6 w-6" aria-hidden="true" />
               )}
             </button>
@@ -96,8 +96,8 @@ const Navbar = () => {
             ))}
             <li className='px-3 py-2'>
               <a
-                href="/Pankaj.Resume.pdf"
-                download="Pankaj.Resume.pdf"
+                href="/Pankaj_Gupta_Resume.pdf"
+                download="/Pankaj_Gupta_Resume.pdf"
                 className='inline-block px-4 py-2 rounded-md text-teal-400 text-[13px] border border-teal-300 hover:bg-teal-400 hover:text-bodyColor cursor-pointer duration-300'
                 onClick={() => setIsMenuOpen(false)}
               >
