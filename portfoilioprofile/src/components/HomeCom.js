@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Navbar from './Navbar';
 import About from './About';
@@ -14,10 +14,12 @@ import SidebarIcons from './SidebarIcons';
 import { GitHub, LinkedIn, Twitter, Email } from '@mui/icons-material';
 import Cursor from './Cursor';
 import backgroundimg from '../backgroundimg.png';
+// import { useLocation } from 'react-router-dom';
 // import './images.jpeg'
 const HomeCom = () => {
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  // const { scrollYProgress} = useScroll();
+  // const opacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+   
 
   const { ref: aboutRef, inView: aboutInView } = useInView({ triggerOnce: false, threshold: 0.1 });
   const { ref: projectsRef, inView: projectsInView } = useInView({ triggerOnce: false, threshold: 0.1 });
@@ -25,16 +27,52 @@ const HomeCom = () => {
 
   const showSidebar = aboutInView || projectsInView || contactInView;
 
+  const leftIcons = [
+    { 
+      component: <GitHub className="text-white mb-4 text-xl sm:text-2xl" />, 
+      href: 'https://github.com/pankaj87072' 
+    },
+    { 
+      component: <LinkedIn className="text-white mb-4 text-xl sm:text-2xl" />, 
+      href: 'https://www.linkedin.com/in/pankaj-gupta-067279227' 
+    },
+    { 
+      component: <Twitter className="text-white mb-4 text-xl sm:text-2xl" />, 
+      href: 'https://x.com/pankajg89259771' 
+    }
+  ];
+
+  const rightIcons = [
+    { 
+      component: <Email className="text-white text-xl sm:text-2xl" />, 
+      href: 'mailto:pankaj0420478@gmail.com' 
+    },
+    { 
+      component: <div className='rotate-90 text-teal-300 outline-none h-40 sm:h-56 flex justify-center items-center text-xs sm:text-sm'>
+        pankaj0420478@gmail.com
+      </div>, 
+      href: 'mailto:pankaj0420478@gmail.com' 
+    }
+  ];
+
+  const allMobileIcons = [
+    ...leftIcons,
+    { 
+      component: <Email className="text-white text-xl sm:text-2xl" />, 
+      href: 'mailto:pankaj0420478@gmail.com' 
+    }
+  ];
+
   return (
     <div className="w-full min-h-screen relative bg-black">
-      <Cursor/>
+      <Cursor />
       <Navbar />
-      <div id="home" className="w-full h-screen relative overflow-hidden flex flex-col">
+      <div id="home" className="w-full h-screen relative overflow-hidden flex flex-col ">
         <div 
-          className="absolute inset-0 bg-no-repeat bg-right-top"
+          className="backgroundStyle absolute inset-0 bg-no-repeat bg-right-top"
           style={{ 
             backgroundImage: `url(${backgroundimg})`,
-            backgroundSize: 'contain',
+            // backgroundSize: 'contain',
             opacity: 0.6
           }}
         />
@@ -44,6 +82,7 @@ const HomeCom = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, type: 'spring', stiffness: 120 }}
         >
+          {/* Main content remains the same */}
           <div className="w-full max-w-4xl text-white text-center md:text-left z-10">
             <motion.h1
               className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4"
@@ -80,28 +119,23 @@ const HomeCom = () => {
       <div id="contact" ref={contactRef} className="px-4 md:px-8 py-16">
         <Contact />
       </div>
+      
       {showSidebar && (
         <>
           <SidebarIcons
             side="left"
-            icons={[
-              { component: <GitHub className="text-white mb-4 text-xl sm:text-2xl" />, href: 'https://github.com/pankaj87072' },
-              { component: <LinkedIn className="text-white mb-4 text-xl sm:text-2xl" />, href: 'https://www.linkedin.com/in/pankaj-gupta-067279227' },
-              { component: <Twitter className="text-white mb-4 text-xl sm:text-2xl" />, href: 'https://x.com/pankajg89259771' },
-            ]}
+            icons={leftIcons}
+            allMobileIcons={allMobileIcons}
           />
           <SidebarIcons
             side="right"
-            icons={[
-              { component: <Email className="text-white text-xl sm:text-2xl" />, href: 'mailto:pankaj0420478@gmail.com' },
-              { component: <div className='rotate-90 text-teal-300 outline-none h-40 sm:h-56 flex justify-center items-center text-xs sm:text-sm' style={{ textDecoration: 'none' }}>pankaj0420478@gmail.com</div>, href: 'mailto:pankaj0420478@gmail.com' },
-            ]}
+            icons={rightIcons}
+            allMobileIcons={allMobileIcons}
           />
         </>
       )}
     </div>
   );
 };
-
 
 export default HomeCom;
